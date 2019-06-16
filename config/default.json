@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": 3030
+  },
+  "db": {
+    "name": "erik_bookstore",
+    "dialect": "mysql",
+    "host": "85.10.205.173",
+    "port": 3306,
+    "username": "erikyuntantyo",
+    "password": "Aa123456"
+  }
+}
