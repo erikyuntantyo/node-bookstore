@@ -48,7 +48,13 @@ This is the a ExpressJS example that uses ES6 syntax.
 
 __0.1.0__
 
-- Initial release
+- Initial commit
+
+__0.1.1__
+
+- Add .gitignore configuration file
+
+- Changes services initialization as class object
 
 ## License
 
