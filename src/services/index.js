@@ -8,7 +8,7 @@ class Services {
   constructor(app) {
     this.app = app
     this.models = {
-      books: BooksModel(app.get('dbClient'))
+      books: BooksModel.init(app.get('dbClient'))
     }
   }
 
