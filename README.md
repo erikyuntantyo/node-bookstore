@@ -56,6 +56,10 @@ __0.1.1__
 
 - Changes services initialization as class object
 
+__0.1.2__
+
+- Changes model initialization as class object
+
 ## License
 
 Copyright (c) 2019
