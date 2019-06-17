@@ -4,12 +4,24 @@ import BooksModel from '../models/books'
 
 import configureBooksService from './books/books.service'
 
-export default {
-  generateService: app => {
-    const models = {
+class Services {
+  constructor(app) {
+    this.app = app
+    this.models = {
       books: BooksModel(app.get('dbClient'))
     }
+  }
 
-    configureBooksService(app, models)
+  static init(app) {
+    if (!this.services) {
+      this.services = new Services(app)
+      this.services.generateService()
+    }
+  }
+
+  generateService() {
+    configureBooksService(this.app, this.models)
   }
 }
+
+export default Services
