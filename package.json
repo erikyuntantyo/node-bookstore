@@ -8,7 +8,7 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "NODE_ENV= jest --verbose",
+    "test": "NODE_ENV= jest --verbose --detectOpenHandles",
     "start": "nodemon --exec babel-node src/",
     "debug": "DEBUG=express:* nodemon --exec babel-node src/"
   },
@@ -47,6 +47,7 @@
     "@babel/node": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "request-promise": "^4.2.4"
   }
 }
