@@ -60,6 +60,10 @@ __0.1.2__
 
 - Changes model initialization as class object
 
+__0.1.3__
+
+- Fix test module
+
 ## License
 
 Copyright (c) 2019

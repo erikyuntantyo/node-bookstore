@@ -1,6 +1,6 @@
 {
   "name": "bookstore",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Implementation ExpressJS with ES6 syntax",
   "main": "src/index.js",
   "engines": {
