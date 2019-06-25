@@ -64,6 +64,18 @@ __0.1.3__
 
 - Fix test module
 
+__0.1.4__
+
+- Update node module and shortcut configuration
+
+- Add production configuration file
+
+- Change module to class template
+
+- Update service structure
+
+- Update unit test module
+
 ## License
 
 Copyright (c) 2019
