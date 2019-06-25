@@ -1,12 +1,14 @@
 import config from 'config'
-import app from '../src/app'
 import requestPromise from 'request-promise'
+import iconvLite from 'iconv-lite'
+
+import App from '../src/app'
 
 let server
 
-describe('Application tests with Jest', () => {
+describe('Testing application with Jest', () => {
   beforeAll(done => {
-    server = app.listen(config.server.port)
+    server = App.initialize(config.server.port)
     server.once('listening', () => done())
   })
 
@@ -14,8 +16,28 @@ describe('Application tests with Jest', () => {
     server.close(done)
   })
 
-  it('Test service is running', async () => {
-    const body = await requestPromise('http://localhost:3030')
-    expect(body.server).not.toBeNull()
+  it('test the service is running', async () => {
+    const response = await requestPromise({
+      method: 'GET',
+      uri: 'http://localhost:3030/test',
+      resolveWithFullResponse: true
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body).not.toBeUndefined()
+  })
+
+  it('test the 404 error', async () => {
+    try {
+      const response = await requestPromise({
+        method: 'GET',
+        uri: 'http://localhost:3030',
+        resolveWithFullResponse: true
+      })
+
+      expect(response.statusCode).toBe(404)
+    } catch (err) {
+      expect(err.statusCode).toBe(404)
+    }
   })
 })
