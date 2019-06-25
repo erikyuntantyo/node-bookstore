@@ -2,8 +2,23 @@
 
 import Base from '../base'
 import CustomError from '../custom-error'
+import hook from './hook'
 
-class Service extends Base {
+export default class Service extends Base {
+  constructor(app, models) {
+    super('/books', models, hook, {})
+  }
+
+  static initialize(app, models) {
+    if (!this._service) {
+      this._service = new Service(app, models)
+    }
+
+    app.use(this._service.createRouter())
+
+    return this._service
+  }
+
   async get(id, query) {
     // Use this to enable get request by Id for 'books' model
     return { id }
@@ -40,5 +55,3 @@ class Service extends Base {
     return { id }
   }
 }
-
-export default Service

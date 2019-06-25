@@ -1,26 +1,16 @@
 'use strict'
 
 import Sequelize from 'sequelize'
+import uuidv4 from 'uuidv4'
 
-class Model {
+export default class Model {
   constructor(dbClient) {
-    this.dbClient = dbClient
-  }
-
-  static init(dbClient) {
-    if (!this.model) {
-      this.model = new Model(dbClient)
-    }
-
-    return this.model.define()
-  }
-
-  define() {
-    return this.dbClient.define('books', {
+    this._schema = dbClient.define('books', {
       id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false,
+        defaultValue: uuidv4()
       },
       title: {
         type: Sequelize.STRING,
@@ -50,6 +40,24 @@ class Model {
       }
     })
   }
-}
 
-export default Model
+  static initialize(dbClient) {
+    if (!this._model) {
+      this._model = new Model(dbClient)
+    }
+
+    return this._model
+  }
+
+  static getSchema() {
+    if (this._model) {
+      return this._model._schema
+    }
+
+    throw new Error('Model must be initialized...')
+  }
+
+  getSchema() {
+    return this._schema
+  }
+}

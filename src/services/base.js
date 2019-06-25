@@ -3,7 +3,7 @@
 import express from 'express'
 import CustomError from './custom-error'
 
-class Base {
+export default class Base {
   constructor(path, models, hook, options) {
     this.hook = hook
     this.models = models
@@ -137,5 +137,3 @@ class Base {
     return router
   }
 }
-
-export default Base

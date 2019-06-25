@@ -1,27 +1,17 @@
 'use strict'
 
-import BooksModel from '../models/books'
+import BooksService from './books'
 
-import configureBooksService from './books/books.service'
-
-class Services {
-  constructor(app) {
-    this.app = app
-    this.models = {
-      books: BooksModel.init(app.get('dbClient'))
-    }
+export default class Services {
+  constructor(app, models) {
+    BooksService.initialize(app, models)
   }
 
-  static init(app) {
-    if (!this.services) {
-      this.services = new Services(app)
-      this.services.generateService()
+  static initialize(app, models) {
+    if (!this._services) {
+      this._services = new Services(app, models)
     }
-  }
 
-  generateService() {
-    configureBooksService(this.app, this.models)
+    return this._services
   }
 }
-
-export default Services

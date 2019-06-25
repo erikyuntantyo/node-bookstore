@@ -1,6 +1,6 @@
 'use strict'
 
-class CustomError extends Error {
+export default class CustomError extends Error {
   constructor(code, message) {
     super(message)
 
@@ -17,5 +17,3 @@ class CustomError extends Error {
     }
   }
 }
-
-export default CustomError
