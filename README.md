@@ -76,6 +76,10 @@ __0.1.4__
 
 - Update unit test module
 
+__0.1.5__
+
+- Update default server configuration file
+
 ## License
 
 Copyright (c) 2019
