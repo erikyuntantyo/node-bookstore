@@ -1,29 +1,41 @@
 'use strict'
 
 import bodyParser from 'body-parser'
+import config from 'config'
 import cors from 'cors'
-import dbClient from './sequelize'
 import errorHandler from 'errorhandler'
+import express from 'express'
+// import graphql from 'express-graphql'
 import methodOverride from 'method-override'
-import server from 'express'
+
+import DBClient from './sequelize'
+import Models from './models'
 import Services from './services'
 
-const app = server()
+export default class App {
+  constructor() {
+    this._server = express()
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(bodyParser.json())
-app.use(methodOverride())
-app.use(cors())
-app.use(errorHandler())
+    this._server.use(bodyParser.urlencoded({ extended: true }))
+    this._server.use(bodyParser.json())
+    this._server.use(methodOverride())
+    this._server.use(cors())
+    this._server.use(errorHandler())
 
-app.set('dbClient', dbClient)
+    DBClient.initialize(config.db).then(() => console.log('Database initialized...'))
 
-app
-  .route('/')
-  .get((req, res) => res.json({ server: 'Hi, I am alive...' }).end())
+    this._server.get('/test', (req, res) => res.status(200).json({ responseCode: 200, message: 'Hi, I am alive...' }).end())
 
-Services.init(app)
+    Services.initialize(this._server, Models.initialize(DBClient.connection()).getModels())
 
-export default app
+    this._server.use((req, res) => res.status(404).send('Route doesn\'t exist.').end())
+  }
+
+  static initialize(port, onListen) {
+    if (!this.app) {
+      this.app = new App()
+    }
+
+    return this.app._server.listen(port, onListen)
+  }
+}

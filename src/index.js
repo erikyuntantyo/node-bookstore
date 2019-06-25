@@ -2,9 +2,10 @@
 
 import chalk from 'chalk'
 import config from 'config'
-import app from './app'
 
-app.listen(config.server.port, () => {
+import App from './app'
+
+App.initialize(config.server.port, () => {
   console.log(`App listen on port ${chalk.red.bold(config.server.port)}`)
   console.log(`Press ${chalk.blue.bold('CTRL + C')} to stop this server...`)
 })
