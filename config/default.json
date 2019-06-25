@@ -3,11 +3,11 @@
     "port": 3030
   },
   "db": {
-    "name": "erik_bookstore",
+    "name": "bookstore_db",
     "dialect": "mysql",
-    "host": "85.10.205.173",
+    "host": "localhost",
     "port": 3306,
-    "username": "erikyuntantyo",
-    "password": "Aa123456"
+    "username": "root",
+    "password": "root123"
   }
 }
