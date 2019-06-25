@@ -8,9 +8,11 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "NODE_ENV= jest --verbose --detectOpenHandles",
+    "test": "yarn run eslint && NODE_ENV= jest --verbose --detectOpenHandles",
     "start": "nodemon --exec babel-node src/",
-    "debug": "DEBUG=express:* nodemon --exec babel-node src/"
+    "debug": "DEBUG=express:* nodemon --exec babel-node src/",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -40,7 +42,8 @@
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.8.9"
+    "sequelize": "^5.8.9",
+    "uuidv4": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
